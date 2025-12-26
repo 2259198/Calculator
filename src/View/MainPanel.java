@@ -9,7 +9,6 @@ public class MainPanel extends JPanel implements ActionListener {
 
     Dimension appDimension = Toolkit.getDefaultToolkit().getScreenSize();
 
-    public final int MAX_BOUTTONS = 10;
     public final int MAX_COLUMNS = 3;
 
     JPanel mainPanel = new JPanel();
@@ -40,10 +39,12 @@ public class MainPanel extends JPanel implements ActionListener {
     private void createMainPanel() {
         mainPanel = new JPanel(new BorderLayout(10, 10));
         mainPanel.setBorder(BorderFactory.createLineBorder(Color.BLUE, 4));
-        mainPanel.setPreferredSize(new Dimension(500, 300));
+        mainPanel.setPreferredSize(new Dimension(appDimension.width / 5, appDimension.height / 2));
 
         createTextFieldPanel();
         createButtonPanel();
+
+        mainPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
 
         mainPanel.add(textFieldPanel, BorderLayout.NORTH);
         mainPanel.add(buttonPanel, BorderLayout.CENTER);
@@ -64,7 +65,7 @@ public class MainPanel extends JPanel implements ActionListener {
     private void createButtonPanel() {
         buttonPanel = new JPanel(new GridLayout(0, MAX_COLUMNS, 5, 5));
 
-        for (int i = 0; i < MAX_BOUTTONS; i++) {
+        for (int i = 9; i >= 0; i--) {
             JButton button = new JButton(String.valueOf(i));
             button.addActionListener(this);
             button.setBackground(ColorPalette.MAIN_COLOR);
