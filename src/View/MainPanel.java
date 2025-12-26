@@ -15,18 +15,19 @@ public class MainPanel extends JPanel implements ActionListener {
     public MainPanel()
     {
         panelLayout();
-        configurationOfPanel();
+        buttonCreation();
     }
 
     public void panelLayout()
     {
-        mainPanel = new JPanel();
         this.setLayout(new GridLayout(0, 3));
+
+        mainPanel = new JPanel();
         mainPanel.setBorder(BorderFactory.createLineBorder(Color.BLUE, 4));
         mainPanel.setPreferredSize(new Dimension(500, 200));
     }
 
-    public void configurationOfPanel()
+    public void buttonCreation()
     {
         buttons = new JButton();
 
@@ -34,12 +35,17 @@ public class MainPanel extends JPanel implements ActionListener {
         {
             buttons = new JButton(String.valueOf(i));
             buttons.addActionListener(this);
-            buttons.setPreferredSize(new Dimension(130, 30));
+            buttons.setPreferredSize(new Dimension(100, 50));
+            buttons.setBackground(ColorPalette.MAIN_COLOR);
+            buttons.setForeground(ColorPalette.TEXT_COLOR);
+
             add(buttons);
 
             mainPanel.add(buttons);
         }
 
+
+        mainPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(mainPanel, BorderLayout.CENTER);
     }
 
