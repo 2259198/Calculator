@@ -4,6 +4,8 @@ import javax.swing.*;
 
 public class MainFrame extends JFrame implements Runnable {
 
+    MainPanel mainPanel = new MainPanel();
+
     @Override
     public void run()
     {
@@ -17,6 +19,8 @@ public class MainFrame extends JFrame implements Runnable {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setTitle("Calculator app");
+
+        add(mainPanel);
     }
 
 }
