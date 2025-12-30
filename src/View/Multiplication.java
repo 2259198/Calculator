@@ -1,15 +1,17 @@
-public class Addition implements OperationsLogic{
+package View;
+
+public class Multiplication implements OperationsLogic{
 
     @Override
     public int operation(int number1, int number2)
     {
-        return number1 + number2;
+        return number1 * number2;
     }
 
     @Override
     public String getOperation()
     {
-        return "+";
+        return "*";
     }
 
 }

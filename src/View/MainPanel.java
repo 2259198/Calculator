@@ -30,11 +30,11 @@ public class MainPanel extends JPanel implements ActionListener {
 
     public void panelLayout()
     {
+        setLayout(new GridBagLayout());
         mainPanel = new JPanel();
-        mainPanel.setLayout(new GridLayout(0, MAX_COLUMNS));
 
         mainPanel.setBorder(BorderFactory.createLineBorder(Color.BLUE, 4));
-        mainPanel.setPreferredSize(new Dimension(500, 200));
+        mainPanel.setPreferredSize(new Dimension(600, 200));
     }
 
     private void createMainPanel() {
@@ -124,8 +124,9 @@ public class MainPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event)
     {
-        String command = event.getActionCommand();
+        OperationsLogic operation = null;
 
+        String command = event.getActionCommand();
 
         switch (command)
         {
@@ -143,6 +144,39 @@ public class MainPanel extends JPanel implements ActionListener {
                 break;
             case "x":
                 mainTextField.setText(mainTextField.getText().concat("x"));
+                break;
+            case "=":
+                mainTextField.setText(mainTextField.getText().concat("="));
+                break;
+            case "0":
+                mainTextField.setText(mainTextField.getText().concat("0"));
+                break;
+            case "1":
+                mainTextField.setText(mainTextField.getText().concat("1"));
+                break;
+            case "2":
+                mainTextField.setText(mainTextField.getText().concat("2"));
+                break;
+            case "3":
+                mainTextField.setText(mainTextField.getText().concat("3"));
+                break;
+            case "4":
+                mainTextField.setText(mainTextField.getText().concat("4"));
+                break;
+            case "5":
+                mainTextField.setText(mainTextField.getText().concat("5"));
+                break;
+            case "6":
+                mainTextField.setText(mainTextField.getText().concat("6"));
+                break;
+            case "7":
+                mainTextField.setText(mainTextField.getText().concat("7"));
+                break;
+            case "8":
+                mainTextField.setText(mainTextField.getText().concat("8"));
+                break;
+            case "9":
+                mainTextField.setText(mainTextField.getText().concat("9"));
                 break;
         }
     }
