@@ -38,7 +38,7 @@ public class MainPanel extends JPanel implements ActionListener {
 
     private void createMainPanel() {
         mainPanel = new JPanel(new BorderLayout(10, 10));
-        mainPanel.setBorder(BorderFactory.createLineBorder(Color.BLUE, 4));
+        //mainPanel.setBorder(BorderFactory.createLineBorder(Color.BLUE, 4));
         mainPanel.setPreferredSize(new Dimension(appDimension.width / 5, appDimension.height / 2));
 
         createTextFieldPanel();
@@ -58,30 +58,67 @@ public class MainPanel extends JPanel implements ActionListener {
         mainTextField.setEditable(false);
 
         textFieldPanel = new JPanel(new BorderLayout());
-        textFieldPanel.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
+        //textFieldPanel.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
         textFieldPanel.add(mainTextField, BorderLayout.CENTER);
     }
 
     private void createButtonPanel() {
-        buttonPanel = new JPanel(new GridLayout(0, MAX_COLUMNS, 5, 5));
+        buttonPanel = new JPanel(new GridBagLayout());
 
-        for (int i = 9; i >= 0; i--) {
-            JButton button = new JButton(String.valueOf(i));
-            button.addActionListener(this);
-            button.setBackground(ColorPalette.MAIN_COLOR);
-            button.setForeground(ColorPalette.TEXT_COLOR);
-            button.setBorderPainted(false);
+        addButton("7", 0, 0, 1, 1);
+        addButton("8", 1, 0, 1, 1);
+        addButton("9", 2, 0, 1, 1);
+        addButton("÷", 3, 0, 1, 1);
 
-            buttonPanel.add(button);
-        }
+        addButton("4", 0, 1, 1, 1);
+        addButton("5", 1, 1, 1, 1);
+        addButton("6", 2, 1, 1, 1);
+        addButton("×", 3, 1, 1, 1);
+
+        addButton("1", 0, 2, 1, 1);
+        addButton("2", 1, 2, 1, 1);
+        addButton("3", 2, 2, 1, 1);
+        addButton("−", 3, 2, 1, 1);
+
+        addButton("0", 0, 3, 2, 1);
+        addButton(".", 1, 3, 1, 1);
+        addButton("+", 2, 3, 1, 1);
+        addButton("=", 3, 3, 1, 1);
     }
 
+    private void addButton(String text, int x, int y, int width, int height) {
+        JButton button = new JButton(text);
+        button.addActionListener(this);
+        button.setBackground(ColorPalette.MAIN_COLOR);
+        button.setForeground(ColorPalette.TEXT_COLOR);
+        button.setBorderPainted(false);
+        //button.setFont(new Font("Arial", Font.BOLD, 18));
+
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.gridx = x;
+        gbc.gridy = y;
+        gbc.gridwidth = width;
+        gbc.gridheight = height;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.insets = new Insets(5, 5, 5, 5);
+
+        buttonPanel.add(button, gbc);
+    }
 
 
     @Override
     public void actionPerformed(ActionEvent event)
     {
+        String command = event.getActionCommand();
 
+        if (command.matches("\\d")) {
+            mainTextField.setText(mainTextField.getText() + command);
+        } else {
+            mainTextField.setText(mainTextField.getText() + " " + command + " ");
+        }
     }
 
 }
