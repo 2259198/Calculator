@@ -1,6 +1,7 @@
 package View;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,6 +41,7 @@ public class MainPanel extends JPanel implements ActionListener {
         mainPanel = new JPanel(new BorderLayout(10, 10));
         //mainPanel.setBorder(BorderFactory.createLineBorder(Color.BLUE, 4));
         mainPanel.setPreferredSize(new Dimension(appDimension.width / 5, appDimension.height / 2));
+        mainPanel.setBorder(new EmptyBorder(25,25,25,25));
 
         createTextFieldPanel();
         createButtonPanel();
@@ -68,7 +70,7 @@ public class MainPanel extends JPanel implements ActionListener {
         addButton("%", 0, 0, 1, 1);
         addButton("CE", 1, 0, 1, 1);
         addButton("C", 2, 0, 1, 1);
-        addButton("<-", 3, 0, 1, 1);
+        addButton("←", 3, 0, 1, 1);
 
         addButton("1/x", 0, 1, 1, 1);
         addButton("x²", 1, 1, 1, 1);
@@ -143,16 +145,6 @@ public class MainPanel extends JPanel implements ActionListener {
                 mainTextField.setText(mainTextField.getText().concat("x"));
                 break;
         }
-
-        if(command.equals(".")){
-
-        }
-
-        /*if (command.matches("\\d")) {
-            mainTextField.setText(mainTextField.getText() + command);
-        } else {
-            mainTextField.setText(mainTextField.getText() + " " + command + " ");
-        }*/
     }
 
 }
