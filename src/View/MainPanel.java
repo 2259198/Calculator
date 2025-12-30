@@ -13,14 +13,18 @@ public class MainPanel extends JPanel implements ActionListener {
     public final int MAX_COLUMNS = 3;
 
     JPanel mainPanel = new JPanel();
-
     JPanel textFieldPanel;
-
     JPanel buttonPanel;
 
     JButton buttons;
 
     JTextField mainTextField;
+
+    private int firstNumber = 0;
+    private int secondNumber = 0;
+    private OperationsLogic currentOperation = null;
+    private boolean startNewNumber = true;
+
 
     public MainPanel()
     {
@@ -120,6 +124,65 @@ public class MainPanel extends JPanel implements ActionListener {
         buttonPanel.add(button, gbc);
     }
 
+    private void appendNumber(String number) {
+        if (startNewNumber) {
+            mainTextField.setText(number);
+            startNewNumber = false;
+        }
+        else {
+            mainTextField.setText(mainTextField.getText() + number);
+        }
+    }
+
+    private void handleAddition() {
+        firstNumber = Integer.parseInt(mainTextField.getText());
+        currentOperation = new Addition();
+        startNewNumber = true;
+    }
+
+    private void handleSubtraction()
+    {
+        firstNumber = Integer.parseInt(mainTextField.getText());
+        currentOperation = new Substract();
+        startNewNumber = true;
+    }
+
+    private void handleMultiplication()
+    {
+        firstNumber = Integer.parseInt(mainTextField.getText());
+        currentOperation = new Multiplication();
+        startNewNumber = true;
+    }
+
+    private void handleDivision()
+    {
+        firstNumber = Integer.parseInt(mainTextField.getText());
+        currentOperation = new Division();
+        startNewNumber = true;
+    }
+
+    private void handleClear()
+    {
+        mainTextField.setText("");
+        startNewNumber = true;
+    }
+
+    private void handleCE()
+    {
+        mainTextField.setText("0");
+        startNewNumber = true;
+    }
+
+    private void handleEquals() {
+        if (currentOperation == null) return;
+
+        secondNumber = Integer.parseInt(mainTextField.getText());
+        double result = currentOperation.operation(firstNumber, secondNumber);
+
+        mainTextField.setText(String.valueOf(result));
+        startNewNumber = true;
+        currentOperation = null;
+    }
 
     @Override
     public void actionPerformed(ActionEvent event)
@@ -130,53 +193,32 @@ public class MainPanel extends JPanel implements ActionListener {
 
         switch (command)
         {
+            case "0": case "1": case "2": case "3": case "4": case "5": case "6": case "7": case "8": case "9":
+                appendNumber(command);
+                break;
             case ".":
                 mainTextField.setText(mainTextField.getText().concat("."));
                 break;
             case "+":
-                mainTextField.setText(mainTextField.getText().concat("+"));
+                handleAddition();
                 break;
             case "-":
-                mainTextField.setText(mainTextField.getText().concat("-"));
+                handleSubtraction();
                 break;
             case "/":
-                mainTextField.setText(mainTextField.getText().concat("/"));
+                handleDivision();
                 break;
             case "x":
-                mainTextField.setText(mainTextField.getText().concat("x"));
+                handleMultiplication();
                 break;
             case "=":
-                mainTextField.setText(mainTextField.getText().concat("="));
+                handleEquals();
                 break;
-            case "0":
-                mainTextField.setText(mainTextField.getText().concat("0"));
+            case "C":
+                handleClear();
                 break;
-            case "1":
-                mainTextField.setText(mainTextField.getText().concat("1"));
-                break;
-            case "2":
-                mainTextField.setText(mainTextField.getText().concat("2"));
-                break;
-            case "3":
-                mainTextField.setText(mainTextField.getText().concat("3"));
-                break;
-            case "4":
-                mainTextField.setText(mainTextField.getText().concat("4"));
-                break;
-            case "5":
-                mainTextField.setText(mainTextField.getText().concat("5"));
-                break;
-            case "6":
-                mainTextField.setText(mainTextField.getText().concat("6"));
-                break;
-            case "7":
-                mainTextField.setText(mainTextField.getText().concat("7"));
-                break;
-            case "8":
-                mainTextField.setText(mainTextField.getText().concat("8"));
-                break;
-            case "9":
-                mainTextField.setText(mainTextField.getText().concat("9"));
+            case "CE":
+                handleCE();
                 break;
         }
     }

@@ -3,7 +3,7 @@ package View;
 public class Addition implements OperationsLogic{
 
     @Override
-    public int operation(int number1, int number2)
+    public double operation(int number1, int number2)
     {
         return number1 + number2;
     }

@@ -2,7 +2,7 @@ package View;
 
 public interface OperationsLogic {
 
-    public int operation(int number1, int number2);
+    public double operation(int number1, int number2);
     public String getOperation();
 
 }
