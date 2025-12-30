@@ -65,25 +65,35 @@ public class MainPanel extends JPanel implements ActionListener {
     private void createButtonPanel() {
         buttonPanel = new JPanel(new GridBagLayout());
 
-        addButton("7", 0, 0, 1, 1);
-        addButton("8", 1, 0, 1, 1);
-        addButton("9", 2, 0, 1, 1);
-        addButton("÷", 3, 0, 1, 1);
+        addButton("%", 0, 0, 1, 1);
+        addButton("CE", 1, 0, 1, 1);
+        addButton("C", 2, 0, 1, 1);
+        addButton("<-", 3, 0, 1, 1);
 
-        addButton("4", 0, 1, 1, 1);
-        addButton("5", 1, 1, 1, 1);
-        addButton("6", 2, 1, 1, 1);
-        addButton("×", 3, 1, 1, 1);
+        addButton("1/x", 0, 1, 1, 1);
+        addButton("x²", 1, 1, 1, 1);
+        addButton("√", 2, 1, 1, 1);
+        addButton("/", 3, 1, 1, 1);
 
-        addButton("1", 0, 2, 1, 1);
-        addButton("2", 1, 2, 1, 1);
-        addButton("3", 2, 2, 1, 1);
-        addButton("−", 3, 2, 1, 1);
+        addButton("7", 0, 2, 1, 1);
+        addButton("8", 1, 2, 1, 1);
+        addButton("9", 2, 2, 1, 1);
+        addButton("x", 3, 2, 1, 1);
 
-        addButton("0", 0, 3, 2, 1);
-        addButton(".", 1, 3, 1, 1);
-        addButton("+", 2, 3, 1, 1);
-        addButton("=", 3, 3, 1, 1);
+        addButton("4", 0, 3, 1, 1);
+        addButton("5", 1, 3, 1, 1);
+        addButton("6", 2, 3, 1, 1);
+        addButton("-", 3, 3, 1, 1);
+
+        addButton("1", 0, 4, 1, 1);
+        addButton("2", 1, 4, 1, 1);
+        addButton("3", 2, 4, 1, 1);
+        addButton("+", 3, 4, 1, 1);
+
+        addButton("+/-", 0, 5, 1, 1);
+        addButton("0", 1, 5, 1, 1);
+        addButton(".", 2, 5, 1, 1);
+        addButton("=", 3, 5, 1, 1);
     }
 
     private void addButton(String text, int x, int y, int width, int height) {
@@ -92,7 +102,7 @@ public class MainPanel extends JPanel implements ActionListener {
         button.setBackground(ColorPalette.MAIN_COLOR);
         button.setForeground(ColorPalette.TEXT_COLOR);
         button.setBorderPainted(false);
-        //button.setFont(new Font("Arial", Font.BOLD, 18));
+        button.setFont(new Font("Arial", Font.BOLD, 18));
 
         GridBagConstraints gbc = new GridBagConstraints();
 
@@ -114,11 +124,35 @@ public class MainPanel extends JPanel implements ActionListener {
     {
         String command = event.getActionCommand();
 
-        if (command.matches("\\d")) {
+
+        switch (command)
+        {
+            case ".":
+                mainTextField.setText(mainTextField.getText().concat("."));
+                break;
+            case "+":
+                mainTextField.setText(mainTextField.getText().concat("+"));
+                break;
+            case "-":
+                mainTextField.setText(mainTextField.getText().concat("-"));
+                break;
+            case "/":
+                mainTextField.setText(mainTextField.getText().concat("/"));
+                break;
+            case "x":
+                mainTextField.setText(mainTextField.getText().concat("x"));
+                break;
+        }
+
+        if(command.equals(".")){
+
+        }
+
+        /*if (command.matches("\\d")) {
             mainTextField.setText(mainTextField.getText() + command);
         } else {
             mainTextField.setText(mainTextField.getText() + " " + command + " ");
-        }
+        }*/
     }
 
 }
