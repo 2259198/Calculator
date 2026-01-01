@@ -1,11 +1,17 @@
 package View;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class MainFrame extends JFrame implements Runnable {
 
     MainPanel mainPanel = new MainPanel();
+
+    public MainFrame() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    }
 
     @Override
     public void run()

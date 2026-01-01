@@ -5,6 +5,10 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+
+import javax.sound.sampled.*;
 
 public class MainPanel extends JPanel implements ActionListener {
 
@@ -26,10 +30,19 @@ public class MainPanel extends JPanel implements ActionListener {
     private boolean startNewNumber = true;
 
 
-    public MainPanel()
-    {
+    File file = new File("src/Sound/hover_sound.wav");
+
+
+    public MainPanel() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         panelLayout();
         createMainPanel();
+
+
+        AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioStream);
+
+        clip.start();
     }
 
     public void panelLayout()
