@@ -5,6 +5,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -30,7 +32,10 @@ public class MainPanel extends JPanel implements ActionListener {
     private boolean startNewNumber = true;
 
 
-    File file = new File("src/Sound/hover_sound.wav");
+    File fileHover = new File("src/Sound/hover_sound.wav");
+    File fileClick = new File("src/Sound/button_Clicked.wav");
+    private Clip hoverClip;
+    private Clip clickClip;
 
 
     public MainPanel() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
@@ -38,11 +43,12 @@ public class MainPanel extends JPanel implements ActionListener {
         createMainPanel();
 
 
-        AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
-        Clip clip = AudioSystem.getClip();
-        clip.open(audioStream);
-
-        clip.start();
+        AudioInputStream audioStreamHover = AudioSystem.getAudioInputStream(fileHover);
+        AudioInputStream audioStreamClicked = AudioSystem.getAudioInputStream(fileClick);
+        hoverClip = AudioSystem.getClip();
+        hoverClip.open(audioStreamHover);
+        clickClip = AudioSystem.getClip();
+        clickClip.open(audioStreamClicked);
     }
 
     public void panelLayout()
@@ -122,6 +128,21 @@ public class MainPanel extends JPanel implements ActionListener {
         button.setForeground(ColorPalette.TEXT_COLOR);
         button.setBorderPainted(false);
         button.setFont(new Font("Arial", Font.BOLD, 18));
+
+
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                clickClip.setFramePosition(0);
+                clickClip.start();
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                hoverClip.setFramePosition(0);
+                hoverClip.start();
+            }
+        });
 
         GridBagConstraints gbc = new GridBagConstraints();
 

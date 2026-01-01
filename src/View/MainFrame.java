@@ -27,7 +27,7 @@ public class MainFrame extends JFrame implements Runnable {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setTitle("Calculator app");
 
-        mainPanel.setBackground(new Color(0.0f,0.0f,0.0f, 0.2f));
+        mainPanel.setBackground(ColorPalette.MAIN_COLOR);
 
         add(mainPanel);
     }
