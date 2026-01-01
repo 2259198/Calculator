@@ -169,30 +169,56 @@ public class MainPanel extends JPanel implements ActionListener {
     }
 
     private void handleAddition() {
-        firstNumber = Integer.parseInt(mainTextField.getText());
-        currentOperation = new Addition();
-        startNewNumber = true;
+        try{
+            firstNumber = Integer.parseInt(mainTextField.getText());
+            currentOperation = new Addition();
+            startNewNumber = true;
+        }
+        catch (NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(this, "Please enter a valid numeric values", "Input error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void handleSubtraction()
     {
-        firstNumber = Integer.parseInt(mainTextField.getText());
-        currentOperation = new Substract();
-        startNewNumber = true;
+
+        try{
+            firstNumber = Integer.parseInt(mainTextField.getText());
+            currentOperation = new Substract();
+            startNewNumber = true;
+        }
+        catch (NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(this, "Please enter a valid numeric values", "Input error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void handleMultiplication()
     {
-        firstNumber = Integer.parseInt(mainTextField.getText());
-        currentOperation = new Multiplication();
-        startNewNumber = true;
+        try {
+            firstNumber = Integer.parseInt(mainTextField.getText());
+            currentOperation = new Multiplication();
+            startNewNumber = true;
+        }
+        catch (NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(this, "Please enter a valid numeric values", "Input error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }
 
     private void handleDivision()
     {
-        firstNumber = Integer.parseInt(mainTextField.getText());
-        currentOperation = new Division();
-        startNewNumber = true;
+        try{
+            firstNumber = Integer.parseInt(mainTextField.getText());
+            currentOperation = new Division();
+            startNewNumber = true;
+        }
+        catch (NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(this, "Please enter a valid numeric values", "Input error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void handleClear()
