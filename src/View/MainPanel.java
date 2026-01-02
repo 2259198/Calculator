@@ -39,17 +39,10 @@ public class MainPanel extends JPanel implements ActionListener {
     private Clip clickClip;
 
 
-    public MainPanel() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+    public MainPanel() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         panelLayout();
         createMainPanel();
-
-
-        AudioInputStream audioStreamHover = AudioSystem.getAudioInputStream(fileHover);
-        AudioInputStream audioStreamClicked = AudioSystem.getAudioInputStream(fileClick);
-        hoverClip = AudioSystem.getClip();
-        hoverClip.open(audioStreamHover);
-        clickClip = AudioSystem.getClip();
-        clickClip.open(audioStreamClicked);
+        audioControlLogic();
     }
 
     public void panelLayout()
@@ -75,6 +68,16 @@ public class MainPanel extends JPanel implements ActionListener {
         mainPanel.add(buttonPanel, BorderLayout.CENTER);
 
         add(mainPanel);
+    }
+
+    public void audioControlLogic() throws UnsupportedAudioFileException, IOException, LineUnavailableException
+    {
+        AudioInputStream audioStreamHover = AudioSystem.getAudioInputStream(fileHover);
+        AudioInputStream audioStreamClicked = AudioSystem.getAudioInputStream(fileClick);
+        hoverClip = AudioSystem.getClip();
+        hoverClip.open(audioStreamHover);
+        clickClip = AudioSystem.getClip();
+        clickClip.open(audioStreamClicked);
     }
 
 
@@ -165,7 +168,12 @@ public class MainPanel extends JPanel implements ActionListener {
         }
     }
 
-    private void handleAddition() {
+    private void handleAddition()
+    {
+        if (checkIfTextFieldIsEmpty()) {
+            return;
+        }
+
         try{
             firstNumber = Double.parseDouble(mainTextField.getText());
             currentOperation = new Addition();
@@ -179,6 +187,10 @@ public class MainPanel extends JPanel implements ActionListener {
 
     private void handleSubtraction()
     {
+        if (checkIfTextFieldIsEmpty()) {
+            return;
+        }
+
         try{
             firstNumber = Double.parseDouble(mainTextField.getText());
             currentOperation = new Substract();
@@ -192,6 +204,10 @@ public class MainPanel extends JPanel implements ActionListener {
 
     private void handleMultiplication()
     {
+        if (checkIfTextFieldIsEmpty()) {
+            return;
+        }
+
         try {
             firstNumber = Double.parseDouble(mainTextField.getText());
             currentOperation = new Multiplication();
@@ -206,6 +222,10 @@ public class MainPanel extends JPanel implements ActionListener {
 
     private void handleSquareRoot()
     {
+        if (checkIfTextFieldIsEmpty()) {
+            return;
+        }
+
         try {
             firstNumber = Double.parseDouble(mainTextField.getText());
             currentOperation = new SquareRoot();
@@ -220,26 +240,26 @@ public class MainPanel extends JPanel implements ActionListener {
 
     private void handleToThePower()
     {
-        String text = mainTextField.getText();
-
-        if (text == null || text.isEmpty()) {
-            JOptionPane.showMessageDialog(this,"There's nothing entered in the text field, please enter something","Blank text field error",JOptionPane.ERROR_MESSAGE);
+        if (checkIfTextFieldIsEmpty()) {
             return;
         }
 
-        try{
+        try {
             firstNumber = Double.parseDouble(mainTextField.getText());
             currentOperation = new ToThePower();
             handleEquals();
-        }
-        catch (NumberFormatException e)
-        {
+        } catch (NumberFormatException e) {
             jOptionPaneMessageError();
         }
     }
 
+
     private void handleDivision()
     {
+        if (checkIfTextFieldIsEmpty()) {
+            return;
+        }
+
         try{
             firstNumber = Double.parseDouble(mainTextField.getText());
             currentOperation = new Division();
@@ -253,6 +273,10 @@ public class MainPanel extends JPanel implements ActionListener {
 
     private void handleReciprocal()
     {
+        if (checkIfTextFieldIsEmpty()) {
+            return;
+        }
+
         try{
             firstNumber = Double.parseDouble(mainTextField.getText());
             currentOperation = new Reciprocal();
@@ -266,6 +290,10 @@ public class MainPanel extends JPanel implements ActionListener {
 
     private void handlePlusMinus()
     {
+        if (checkIfTextFieldIsEmpty()) {
+            return;
+        }
+
         try{
             double value = Double.parseDouble(mainTextField.getText());
             value = -value;
@@ -292,6 +320,9 @@ public class MainPanel extends JPanel implements ActionListener {
 
     private void handleEquals() {
         if (currentOperation == null) return;
+        if (checkIfTextFieldIsEmpty()) {
+            return;
+        }
 
         secondNumber = Double.parseDouble(mainTextField.getText());
         double result = currentOperation.operation(firstNumber, secondNumber);
@@ -299,6 +330,18 @@ public class MainPanel extends JPanel implements ActionListener {
         mainTextField.setText(String.valueOf(result));
         startNewNumber = true;
         currentOperation = null;
+    }
+
+    private boolean checkIfTextFieldIsEmpty()
+    {
+        String text = mainTextField.getText();
+
+        if (text == null || text.isEmpty()) {
+            JOptionPane.showMessageDialog(this,"There's nothing entered in the text field, please enter something","Blank text field error",JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+
+        return false;
     }
 
     private void jOptionPaneMessageError()
