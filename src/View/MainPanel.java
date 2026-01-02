@@ -26,8 +26,8 @@ public class MainPanel extends JPanel implements ActionListener {
 
     JTextField mainTextField;
 
-    private int firstNumber = 0;
-    private int secondNumber = 0;
+    private double firstNumber = 0;
+    private double secondNumber = 0;
     private OperationsLogic currentOperation = null;
     private boolean startNewNumber = true;
 
@@ -83,7 +83,6 @@ public class MainPanel extends JPanel implements ActionListener {
         mainTextField.setEditable(false);
 
         textFieldPanel = new JPanel(new BorderLayout());
-        //textFieldPanel.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
         textFieldPanel.add(mainTextField, BorderLayout.CENTER);
     }
 
@@ -127,8 +126,7 @@ public class MainPanel extends JPanel implements ActionListener {
         button.setBackground(ColorPalette.MAIN_COLOR);
         button.setForeground(ColorPalette.TEXT_COLOR);
         button.setBorderPainted(false);
-        button.setFont(new Font("Arial", Font.BOLD, 18));
-
+        button.setFont(TextPalette.MAIN_FONT);
 
         button.addMouseListener(new MouseAdapter() {
             @Override
@@ -170,7 +168,7 @@ public class MainPanel extends JPanel implements ActionListener {
 
     private void handleAddition() {
         try{
-            firstNumber = Integer.parseInt(mainTextField.getText());
+            firstNumber = Double.parseDouble(mainTextField.getText());
             currentOperation = new Addition();
             startNewNumber = true;
         }
@@ -183,7 +181,7 @@ public class MainPanel extends JPanel implements ActionListener {
     private void handleSubtraction()
     {
         try{
-            firstNumber = Integer.parseInt(mainTextField.getText());
+            firstNumber = Double.parseDouble(mainTextField.getText());
             currentOperation = new Substract();
             startNewNumber = true;
         }
@@ -196,7 +194,7 @@ public class MainPanel extends JPanel implements ActionListener {
     private void handleMultiplication()
     {
         try {
-            firstNumber = Integer.parseInt(mainTextField.getText());
+            firstNumber = Double.parseDouble(mainTextField.getText());
             currentOperation = new Multiplication();
             startNewNumber = true;
         }
@@ -210,7 +208,7 @@ public class MainPanel extends JPanel implements ActionListener {
     private void handleSquareRoot()
     {
         try {
-            firstNumber = Integer.parseInt(mainTextField.getText());
+            firstNumber = Double.parseDouble(mainTextField.getText());
             currentOperation = new SquareRoot();
             handleEquals();
         }
@@ -224,7 +222,7 @@ public class MainPanel extends JPanel implements ActionListener {
     private void handleToThePower()
     {
         try{
-            firstNumber = Integer.parseInt(mainTextField.getText());
+            firstNumber = Double.parseDouble(mainTextField.getText());
             currentOperation = new ToThePower();
             handleEquals();
         }
@@ -237,7 +235,7 @@ public class MainPanel extends JPanel implements ActionListener {
     private void handleDivision()
     {
         try{
-            firstNumber = Integer.parseInt(mainTextField.getText());
+            firstNumber = Double.parseDouble(mainTextField.getText());
             currentOperation = new Division();
             startNewNumber = true;
         }
@@ -250,7 +248,7 @@ public class MainPanel extends JPanel implements ActionListener {
     private void handleReciprocal()
     {
         try{
-            firstNumber = Integer.parseInt(mainTextField.getText());
+            firstNumber = Double.parseDouble(mainTextField.getText());
             currentOperation = new Reciprocal();
             handleEquals();
         }

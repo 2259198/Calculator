@@ -5,7 +5,7 @@ public class ToThePower implements OperationsLogic{
 
 
     @Override
-    public double operation(int number1, int number2) {
+    public double operation(double number1, double number2) {
         return pow(number1, 2);
     }
 

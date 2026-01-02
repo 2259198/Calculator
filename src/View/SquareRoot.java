@@ -4,7 +4,7 @@ import static java.lang.Math.*;
 public class SquareRoot implements OperationsLogic{
 
     @Override
-    public double operation(int number1, int number2)
+    public double operation(double number1, double number2)
     {
         return sqrt(number1);
     }
