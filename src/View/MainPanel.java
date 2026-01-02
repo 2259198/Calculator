@@ -182,7 +182,6 @@ public class MainPanel extends JPanel implements ActionListener {
 
     private void handleSubtraction()
     {
-
         try{
             firstNumber = Integer.parseInt(mainTextField.getText());
             currentOperation = new Substract();
@@ -205,6 +204,25 @@ public class MainPanel extends JPanel implements ActionListener {
         {
             JOptionPane.showMessageDialog(this, "Please enter a valid numeric values", "Input error", JOptionPane.ERROR_MESSAGE);
         }
+
+    }
+
+    private void handleSquareRoot()
+    {
+        try {
+            firstNumber = Integer.parseInt(mainTextField.getText());
+            currentOperation = new SquareRoot();
+            handleEquals();
+        }
+        catch (NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(this, "Please enter a valid numeric values", "Input error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    private void handleToThePower()
+    {
 
     }
 
@@ -279,6 +297,9 @@ public class MainPanel extends JPanel implements ActionListener {
                 break;
             case "CE":
                 handleCE();
+                break;
+            case "√":
+                handleSquareRoot();
                 break;
         }
     }
