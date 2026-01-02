@@ -1,6 +1,6 @@
-package View;
+package View.Operations;
 
-public class Division implements OperationsLogic{
+public class Division implements OperationsLogic {
 
     @Override
     public double operation(double number1, double number2)

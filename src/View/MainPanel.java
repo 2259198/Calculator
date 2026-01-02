@@ -1,5 +1,9 @@
 package View;
 
+import View.Operations.*;
+import View.Palettes.ColorPalette;
+import View.Palettes.TextPalette;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -266,7 +270,8 @@ public class MainPanel extends JPanel implements ActionListener {
             double value = Double.parseDouble(mainTextField.getText());
             value = -value;
             mainTextField.setText(String.valueOf(value));
-        }catch (NumberFormatException e)
+        }
+        catch (NumberFormatException e)
         {
             jOptionPaneMessageError();
         }

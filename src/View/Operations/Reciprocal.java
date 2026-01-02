@@ -1,6 +1,6 @@
-package View;
+package View.Operations;
 
-public class Reciprocal implements OperationsLogic{
+public class Reciprocal implements OperationsLogic {
     @Override
     public double operation(double number1, double number2) {
         return 1 / number1;

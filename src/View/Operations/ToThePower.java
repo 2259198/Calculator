@@ -1,7 +1,8 @@
-package View;
+package View.Operations;
+
 import static java.lang.Math.*;
 
-public class ToThePower implements OperationsLogic{
+public class ToThePower implements OperationsLogic {
 
 
     @Override

@@ -1,17 +1,17 @@
-package View;
+package View.Operations;
 
-public class Substract implements OperationsLogic{
+public class Addition implements OperationsLogic {
 
     @Override
     public double operation(double number1, double number2)
     {
-        return number1 - number2;
+        return number1 + number2;
     }
 
     @Override
     public String getOperation()
     {
-        return "-";
+        return "+";
     }
 
 }
