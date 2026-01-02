@@ -176,7 +176,7 @@ public class MainPanel extends JPanel implements ActionListener {
         }
         catch (NumberFormatException e)
         {
-            JOptionPane.showMessageDialog(this, "Please enter a valid numeric values", "Input error", JOptionPane.ERROR_MESSAGE);
+            jOptionPaneMessageError();
         }
     }
 
@@ -189,7 +189,7 @@ public class MainPanel extends JPanel implements ActionListener {
         }
         catch (NumberFormatException e)
         {
-            JOptionPane.showMessageDialog(this, "Please enter a valid numeric values", "Input error", JOptionPane.ERROR_MESSAGE);
+            jOptionPaneMessageError();
         }
     }
 
@@ -202,7 +202,7 @@ public class MainPanel extends JPanel implements ActionListener {
         }
         catch (NumberFormatException e)
         {
-            JOptionPane.showMessageDialog(this, "Please enter a valid numeric values", "Input error", JOptionPane.ERROR_MESSAGE);
+            jOptionPaneMessageError();
         }
 
     }
@@ -216,14 +216,22 @@ public class MainPanel extends JPanel implements ActionListener {
         }
         catch (NumberFormatException e)
         {
-            JOptionPane.showMessageDialog(this, "Please enter a valid numeric values", "Input error", JOptionPane.ERROR_MESSAGE);
+            jOptionPaneMessageError();
         }
 
     }
 
     private void handleToThePower()
     {
-
+        try{
+            firstNumber = Integer.parseInt(mainTextField.getText());
+            currentOperation = new ToThePower();
+            handleEquals();
+        }
+        catch (NumberFormatException e)
+        {
+            jOptionPaneMessageError();
+        }
     }
 
     private void handleDivision()
@@ -235,7 +243,20 @@ public class MainPanel extends JPanel implements ActionListener {
         }
         catch (NumberFormatException e)
         {
-            JOptionPane.showMessageDialog(this, "Please enter a valid numeric values", "Input error", JOptionPane.ERROR_MESSAGE);
+            jOptionPaneMessageError();
+        }
+    }
+
+    private void handleReciprocal()
+    {
+        try{
+            firstNumber = Integer.parseInt(mainTextField.getText());
+            currentOperation = new Reciprocal();
+            handleEquals();
+        }
+        catch (NumberFormatException e)
+        {
+            jOptionPaneMessageError();
         }
     }
 
@@ -260,6 +281,11 @@ public class MainPanel extends JPanel implements ActionListener {
         mainTextField.setText(String.valueOf(result));
         startNewNumber = true;
         currentOperation = null;
+    }
+
+    private void jOptionPaneMessageError()
+    {
+        JOptionPane.showMessageDialog(this, "Please enter a valid numeric values", "Input error", JOptionPane.ERROR_MESSAGE);
     }
 
     @Override
@@ -300,6 +326,12 @@ public class MainPanel extends JPanel implements ActionListener {
                 break;
             case "√":
                 handleSquareRoot();
+                break;
+            case "x²":
+                handleToThePower();
+                break;
+            case "1/x":
+                handleReciprocal();
                 break;
         }
     }
