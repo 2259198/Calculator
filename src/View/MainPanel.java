@@ -22,15 +22,12 @@ public class MainPanel extends JPanel implements ActionListener {
     JPanel textFieldPanel;
     JPanel buttonPanel;
 
-    JButton buttons;
-
-    JTextField mainTextField;
+    JTextField mainTextField = new JTextField();
 
     private double firstNumber = 0;
     private double secondNumber = 0;
     private OperationsLogic currentOperation = null;
     private boolean startNewNumber = true;
-
 
     File fileHover = new File("src/Sound/hover_sound.wav");
     File fileClick = new File("src/Sound/button_Clicked.wav");
@@ -62,7 +59,6 @@ public class MainPanel extends JPanel implements ActionListener {
 
     private void createMainPanel() {
         mainPanel = new JPanel(new BorderLayout(10, 10));
-        //mainPanel.setBorder(BorderFactory.createLineBorder(Color.BLUE, 4));
         mainPanel.setPreferredSize(new Dimension(appDimension.width / 5, appDimension.height / 2));
         mainPanel.setBorder(new EmptyBorder(25,25,25,25));
 
@@ -79,7 +75,6 @@ public class MainPanel extends JPanel implements ActionListener {
 
 
     private void createTextFieldPanel() {
-        mainTextField = new JTextField();
         mainTextField.setEditable(false);
 
         textFieldPanel = new JPanel(new BorderLayout());
@@ -221,6 +216,13 @@ public class MainPanel extends JPanel implements ActionListener {
 
     private void handleToThePower()
     {
+        String text = mainTextField.getText();
+
+        if (text == null || text.isEmpty()) {
+            JOptionPane.showMessageDialog(this,"There's nothing entered in the text field, please enter something","Blank text field error",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         try{
             firstNumber = Double.parseDouble(mainTextField.getText());
             currentOperation = new ToThePower();
@@ -258,6 +260,19 @@ public class MainPanel extends JPanel implements ActionListener {
         }
     }
 
+    private void handlePlusMinus()
+    {
+        try{
+            double value = Double.parseDouble(mainTextField.getText());
+            value = -value;
+            mainTextField.setText(String.valueOf(value));
+        }catch (NumberFormatException e)
+        {
+            jOptionPaneMessageError();
+        }
+
+    }
+
     private void handleClear()
     {
         mainTextField.setText("");
@@ -273,7 +288,7 @@ public class MainPanel extends JPanel implements ActionListener {
     private void handleEquals() {
         if (currentOperation == null) return;
 
-        secondNumber = Integer.parseInt(mainTextField.getText());
+        secondNumber = Double.parseDouble(mainTextField.getText());
         double result = currentOperation.operation(firstNumber, secondNumber);
 
         mainTextField.setText(String.valueOf(result));
@@ -330,6 +345,9 @@ public class MainPanel extends JPanel implements ActionListener {
                 break;
             case "1/x":
                 handleReciprocal();
+                break;
+            case "+/-":
+                handlePlusMinus();
                 break;
         }
     }
