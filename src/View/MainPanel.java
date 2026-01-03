@@ -18,20 +18,18 @@ import javax.sound.sampled.*;
 
 public class MainPanel extends JPanel implements ActionListener {
 
-    Dimension appDimension = Toolkit.getDefaultToolkit().getScreenSize();
+    private double firstNumber = 0;
+    private double secondNumber = 0;
+    private OperationsLogic currentOperation = null;
+    private boolean startNewNumber = true;
 
-    public final int MAX_COLUMNS = 3;
+    Dimension appDimension = Toolkit.getDefaultToolkit().getScreenSize();
 
     JPanel mainPanel = new JPanel();
     JPanel textFieldPanel;
     JPanel buttonPanel;
 
     JTextField mainTextField = new JTextField();
-
-    private double firstNumber = 0;
-    private double secondNumber = 0;
-    private OperationsLogic currentOperation = null;
-    private boolean startNewNumber = true;
 
     File fileHover = new File("src/Sound/hover_sound.wav");
     File fileClick = new File("src/Sound/button_Clicked.wav");
@@ -49,14 +47,11 @@ public class MainPanel extends JPanel implements ActionListener {
     {
         setLayout(new GridBagLayout());
         mainPanel = new JPanel();
-
-        mainPanel.setBorder(BorderFactory.createLineBorder(Color.BLUE, 4));
-        mainPanel.setPreferredSize(new Dimension(600, 200));
     }
 
     private void createMainPanel() {
         mainPanel = new JPanel(new BorderLayout(10, 10));
-        mainPanel.setPreferredSize(new Dimension(appDimension.width / 5, appDimension.height / 2));
+        mainPanel.setPreferredSize(new Dimension(400, 600));
         mainPanel.setBorder(new EmptyBorder(25,25,25,25));
 
         createTextFieldPanel();
@@ -73,16 +68,23 @@ public class MainPanel extends JPanel implements ActionListener {
     public void audioControlLogic() throws UnsupportedAudioFileException, IOException, LineUnavailableException
     {
         AudioInputStream audioStreamHover = AudioSystem.getAudioInputStream(fileHover);
-        AudioInputStream audioStreamClicked = AudioSystem.getAudioInputStream(fileClick);
         hoverClip = AudioSystem.getClip();
         hoverClip.open(audioStreamHover);
+
+        AudioInputStream audioStreamClicked = AudioSystem.getAudioInputStream(fileClick);
         clickClip = AudioSystem.getClip();
         clickClip.open(audioStreamClicked);
     }
 
-
     private void createTextFieldPanel() {
         mainTextField.setEditable(false);
+
+        mainTextField.setFont(new Font("Segoe UI", Font.BOLD, 32));
+
+        mainTextField.setHorizontalAlignment(JTextField.LEFT);
+        mainTextField.setMargin(new Insets(10,10,10,10));
+
+        mainTextField.setPreferredSize(new Dimension(0, 80));
 
         textFieldPanel = new JPanel(new BorderLayout());
         textFieldPanel.add(mainTextField, BorderLayout.CENTER);
