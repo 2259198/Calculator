@@ -170,6 +170,17 @@ public class MainPanel extends JPanel implements ActionListener {
         }
     }
 
+    private void handleDot()
+    {
+        if (startNewNumber) {
+            mainTextField.setText("0.");
+            startNewNumber = false;
+        }
+        else if (!mainTextField.getText().contains(".")) {
+            mainTextField.setText(mainTextField.getText() + ".");
+        }
+    }
+
     private void handleAddition()
     {
         if (checkIfTextFieldIsEmpty()) {
@@ -364,7 +375,7 @@ public class MainPanel extends JPanel implements ActionListener {
                 appendNumber(command);
                 break;
             case ".":
-                mainTextField.setText(mainTextField.getText().concat("."));
+                handleDot();
                 break;
             case "+":
                 handleAddition();
