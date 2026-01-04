@@ -236,6 +236,12 @@ public class MainPanel extends JPanel implements ActionListener {
 
         try {
             firstNumber = Double.parseDouble(mainTextField.getText());
+
+            if (firstNumber < 0) {
+                JOptionPane.showMessageDialog(this,"You can't take the square root of a negative number","Square root error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             currentOperation = new SquareRoot();
             handleEquals();
         }
@@ -288,6 +294,11 @@ public class MainPanel extends JPanel implements ActionListener {
         {
             jOptionPaneMessageError();
         }
+    }
+
+    private void handlePI()
+    {
+        mainTextField.setText("" + PI);
     }
 
     private void handlePlusMinus()
@@ -416,6 +427,9 @@ public class MainPanel extends JPanel implements ActionListener {
                 break;
             case "←":
                 handleBackButton();
+                break;
+            case "π":
+                handlePI();
                 break;
         }
     }
