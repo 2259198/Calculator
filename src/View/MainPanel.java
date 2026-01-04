@@ -13,8 +13,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 import javax.sound.sampled.*;
+
+import static java.lang.Math.*;
 
 public class MainPanel extends JPanel implements ActionListener {
 
@@ -183,9 +186,7 @@ public class MainPanel extends JPanel implements ActionListener {
 
     private void handleAddition()
     {
-        if (checkIfTextFieldIsEmpty()) {
-            return;
-        }
+        if (checkIfTextFieldIsEmpty()) return;
 
         try{
             firstNumber = Double.parseDouble(mainTextField.getText());
@@ -200,9 +201,7 @@ public class MainPanel extends JPanel implements ActionListener {
 
     private void handleSubtraction()
     {
-        if (checkIfTextFieldIsEmpty()) {
-            return;
-        }
+        if (checkIfTextFieldIsEmpty()) return;
 
         try{
             firstNumber = Double.parseDouble(mainTextField.getText());
@@ -217,9 +216,7 @@ public class MainPanel extends JPanel implements ActionListener {
 
     private void handleMultiplication()
     {
-        if (checkIfTextFieldIsEmpty()) {
-            return;
-        }
+        if (checkIfTextFieldIsEmpty()) return;
 
         try {
             firstNumber = Double.parseDouble(mainTextField.getText());
@@ -235,9 +232,7 @@ public class MainPanel extends JPanel implements ActionListener {
 
     private void handleSquareRoot()
     {
-        if (checkIfTextFieldIsEmpty()) {
-            return;
-        }
+        if (checkIfTextFieldIsEmpty()) return;
 
         try {
             firstNumber = Double.parseDouble(mainTextField.getText());
@@ -253,9 +248,7 @@ public class MainPanel extends JPanel implements ActionListener {
 
     private void handleToThePower()
     {
-        if (checkIfTextFieldIsEmpty()) {
-            return;
-        }
+        if (checkIfTextFieldIsEmpty()) return;
 
         try {
             firstNumber = Double.parseDouble(mainTextField.getText());
@@ -269,9 +262,7 @@ public class MainPanel extends JPanel implements ActionListener {
 
     private void handleDivision()
     {
-        if (checkIfTextFieldIsEmpty()) {
-            return;
-        }
+        if (checkIfTextFieldIsEmpty()) return;
 
         try{
             firstNumber = Double.parseDouble(mainTextField.getText());
@@ -286,9 +277,7 @@ public class MainPanel extends JPanel implements ActionListener {
 
     private void handleReciprocal()
     {
-        if (checkIfTextFieldIsEmpty()) {
-            return;
-        }
+        if (checkIfTextFieldIsEmpty()) return;
 
         try{
             firstNumber = Double.parseDouble(mainTextField.getText());
@@ -303,9 +292,7 @@ public class MainPanel extends JPanel implements ActionListener {
 
     private void handlePlusMinus()
     {
-        if (checkIfTextFieldIsEmpty()) {
-            return;
-        }
+        if (checkIfTextFieldIsEmpty()) return;
 
         try{
             double value = Double.parseDouble(mainTextField.getText());
@@ -333,16 +320,21 @@ public class MainPanel extends JPanel implements ActionListener {
 
     private void handleEquals() {
         if (currentOperation == null) return;
-        if (checkIfTextFieldIsEmpty()) {
-            return;
-        }
+        if (checkIfTextFieldIsEmpty()) return;
 
         secondNumber = Double.parseDouble(mainTextField.getText());
         double result = currentOperation.operation(firstNumber, secondNumber);
 
-        mainTextField.setText(String.valueOf(result));
+        mainTextField.setText(formatResult(result));
+
         startNewNumber = true;
         currentOperation = null;
+    }
+
+    private String formatResult(double value) {
+        DecimalFormat df = new DecimalFormat("0.##########");
+        df.setRoundingMode(java.math.RoundingMode.HALF_UP);
+        return df.format(value);
     }
 
     private boolean checkIfTextFieldIsEmpty()
