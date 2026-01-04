@@ -5,6 +5,7 @@ import View.Palettes.ColorPalette;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 public class MainFrame extends JFrame implements Runnable {
@@ -29,6 +30,9 @@ public class MainFrame extends JFrame implements Runnable {
         this.setTitle("Calculator app");
 
         mainPanel.setBackground(ColorPalette.MAIN_COLOR);
+
+        Image img = new ImageIcon(this.getClass().getResource("/Icon/CalculatorAppIcon.png")).getImage();
+        this.setIconImage(img);
 
         add(mainPanel);
     }

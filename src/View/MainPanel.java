@@ -82,7 +82,7 @@ public class MainPanel extends JPanel implements ActionListener {
     private void createTextFieldPanel() {
         mainTextField.setEditable(false);
 
-        mainTextField.setFont(new Font("Segoe UI", Font.BOLD, 32));
+        mainTextField.setFont(TextPalette.TEXT_FIELD_FONT);
 
         mainTextField.setHorizontalAlignment(JTextField.LEFT);
         mainTextField.setMargin(new Insets(10,10,10,10));
