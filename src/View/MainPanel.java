@@ -96,7 +96,7 @@ public class MainPanel extends JPanel implements ActionListener {
     private void createButtonPanel() {
         buttonPanel = new JPanel(new GridBagLayout());
 
-        addButton("%", 0, 0, 1, 1);
+        addButton("π", 0, 0, 1, 1);
         addButton("CE", 1, 0, 1, 1);
         addButton("C", 2, 0, 1, 1);
         addButton("←", 3, 0, 1, 1);
@@ -318,6 +318,18 @@ public class MainPanel extends JPanel implements ActionListener {
         startNewNumber = true;
     }
 
+    private void handleBackButton()
+    {
+        String currentText = mainTextField.getText();
+
+        if(currentText != null || currentText.length() > 0){
+            String newText = currentText.substring(0, currentText.length() - 1);
+            mainTextField.setText(newText);
+        }
+
+
+    }
+
     private void handleEquals() {
         if (currentOperation == null) return;
         if (checkIfTextFieldIsEmpty()) return;
@@ -401,6 +413,9 @@ public class MainPanel extends JPanel implements ActionListener {
                 break;
             case "+/-":
                 handlePlusMinus();
+                break;
+            case "←":
+                handleBackButton();
                 break;
         }
     }
