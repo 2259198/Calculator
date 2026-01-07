@@ -168,6 +168,12 @@ public class MainPanel extends JPanel implements ActionListener {
 
     private void appendNumber(String number) {
 
+        if (mainTextField.getText().equals("0")) {
+            mainTextField.setText(number);
+            startNewNumber = false;
+            return;
+        }
+
         if(mainTextField.getText().length() >= MAX_LENGTH && !startNewNumber)
         {
             jOptionPaneTextFieldMessage();
@@ -364,6 +370,11 @@ public class MainPanel extends JPanel implements ActionListener {
         if (checkIfTextFieldIsEmpty()) return;
 
         secondNumber = Double.parseDouble(mainTextField.getText());
+        if(currentOperation.getOperation().equals("/") && secondNumber == 0)
+        {
+            jOptionPaneCannotDivideByZeroMessage();
+            return;
+        }
         double result = currentOperation.operation(firstNumber, secondNumber);
 
         mainTextField.setText(formatResult(result));
@@ -398,6 +409,11 @@ public class MainPanel extends JPanel implements ActionListener {
     private void jOptionPaneMessageError()
     {
         JOptionPane.showMessageDialog(this, "Please enter a valid numeric values", "Input error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void jOptionPaneCannotDivideByZeroMessage()
+    {
+        JOptionPane.showMessageDialog(this,"Can't divide by zero", "Logic error", JOptionPane.ERROR_MESSAGE);
     }
 
     @Override
