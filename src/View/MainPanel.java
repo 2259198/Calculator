@@ -84,6 +84,7 @@ public class MainPanel extends JPanel implements ActionListener {
     private void createTextFieldPanel() {
 
         mainTextField.setEditable(false);
+        mainTextField.setFocusable(false);
 
         mainTextField.setFont(TextPalette.TEXT_FIELD_FONT);
 
