@@ -26,6 +26,8 @@ public class MainPanel extends JPanel implements ActionListener {
     private OperationsLogic currentOperation = null;
     private boolean startNewNumber = true;
 
+    private static final int MAX_LENGTH = 16;
+
     Dimension appDimension = Toolkit.getDefaultToolkit().getScreenSize();
 
     JPanel mainPanel = new JPanel();
@@ -80,6 +82,7 @@ public class MainPanel extends JPanel implements ActionListener {
     }
 
     private void createTextFieldPanel() {
+
         mainTextField.setEditable(false);
 
         mainTextField.setFont(TextPalette.TEXT_FIELD_FONT);
@@ -164,6 +167,13 @@ public class MainPanel extends JPanel implements ActionListener {
     }
 
     private void appendNumber(String number) {
+
+        if(mainTextField.getText().length() >= MAX_LENGTH && !startNewNumber)
+        {
+            jOptionPaneTextFieldMessage();
+            return;
+        }
+
         if (startNewNumber) {
             mainTextField.setText(number);
             startNewNumber = false;
@@ -175,6 +185,12 @@ public class MainPanel extends JPanel implements ActionListener {
 
     private void handleDot()
     {
+        if(mainTextField.getText().length() >= MAX_LENGTH && !startNewNumber)
+        {
+            jOptionPaneTextFieldMessage();
+            return;
+        }
+
         if (startNewNumber) {
             mainTextField.setText("0.");
             startNewNumber = false;
@@ -298,7 +314,11 @@ public class MainPanel extends JPanel implements ActionListener {
 
     private void handlePI()
     {
-        mainTextField.setText("" + PI);
+        if(startNewNumber)
+        {
+            mainTextField.setText("" + PI);
+            startNewNumber = false;
+        }
     }
 
     private void handlePlusMinus()
@@ -337,8 +357,6 @@ public class MainPanel extends JPanel implements ActionListener {
             String newText = currentText.substring(0, currentText.length() - 1);
             mainTextField.setText(newText);
         }
-
-
     }
 
     private void handleEquals() {
@@ -370,6 +388,11 @@ public class MainPanel extends JPanel implements ActionListener {
         }
 
         return false;
+    }
+
+    private void jOptionPaneTextFieldMessage()
+    {
+        JOptionPane.showMessageDialog(this, "The limit of the textfield has been reached", "Textfield limit", JOptionPane.ERROR_MESSAGE);
     }
 
     private void jOptionPaneMessageError()
