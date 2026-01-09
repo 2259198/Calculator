@@ -332,17 +332,17 @@ public class MainPanel extends JPanel implements ActionListener {
     {
         if (checkIfTextFieldIsEmpty()) return;
 
-        try{
+        try {
             double value = Double.parseDouble(mainTextField.getText());
             value = -value;
-            mainTextField.setText(String.valueOf(value));
+
+            mainTextField.setText(formatResult(value));
         }
-        catch (NumberFormatException e)
-        {
+        catch (NumberFormatException e) {
             jOptionPaneMessageError();
         }
-
     }
+
 
     private void handleClear()
     {
