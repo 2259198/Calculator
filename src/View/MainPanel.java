@@ -209,48 +209,22 @@ public class MainPanel extends JPanel implements ActionListener {
 
     private void handleAddition()
     {
-        if (checkIfTextFieldIsEmpty()) return;
-
-        try{
-            firstNumber = Double.parseDouble(mainTextField.getText());
-            currentOperation = new Addition();
-            startNewNumber = true;
-        }
-        catch (NumberFormatException e)
-        {
-            jOptionPaneMessageError();
-        }
+        handleOperation(new Addition());
     }
 
     private void handleSubtraction()
     {
-        if (checkIfTextFieldIsEmpty()) return;
-
-        try{
-            firstNumber = Double.parseDouble(mainTextField.getText());
-            currentOperation = new Substract();
-            startNewNumber = true;
-        }
-        catch (NumberFormatException e)
-        {
-            jOptionPaneMessageError();
-        }
+        handleOperation(new Substract());
     }
 
     private void handleMultiplication()
     {
-        if (checkIfTextFieldIsEmpty()) return;
+        handleOperation(new Multiplication());
+    }
 
-        try {
-            firstNumber = Double.parseDouble(mainTextField.getText());
-            currentOperation = new Multiplication();
-            startNewNumber = true;
-        }
-        catch (NumberFormatException e)
-        {
-            jOptionPaneMessageError();
-        }
-
+    private void handleDivision()
+    {
+        handleOperation(new Division());
     }
 
     private void handleSquareRoot()
@@ -284,22 +258,6 @@ public class MainPanel extends JPanel implements ActionListener {
             currentOperation = new ToThePower();
             handleEquals();
         } catch (NumberFormatException e) {
-            jOptionPaneMessageError();
-        }
-    }
-
-
-    private void handleDivision()
-    {
-        if (checkIfTextFieldIsEmpty()) return;
-
-        try{
-            firstNumber = Double.parseDouble(mainTextField.getText());
-            currentOperation = new Division();
-            startNewNumber = true;
-        }
-        catch (NumberFormatException e)
-        {
             jOptionPaneMessageError();
         }
     }
@@ -343,7 +301,6 @@ public class MainPanel extends JPanel implements ActionListener {
         }
     }
 
-
     private void handleClear()
     {
         mainTextField.setText("");
@@ -366,7 +323,8 @@ public class MainPanel extends JPanel implements ActionListener {
         }
     }
 
-    private void handleEquals() {
+    private void handleEquals()
+    {
         if (currentOperation == null) return;
         if (checkIfTextFieldIsEmpty()) return;
 
@@ -384,19 +342,19 @@ public class MainPanel extends JPanel implements ActionListener {
         currentOperation = null;
     }
 
-    private String formatResult(double value) {
+    private String formatResult(double value)
+    {
         if (Math.abs(value) >= 1e12 || Math.abs(value) < 1e-9) {
-
             DecimalFormat sci = new DecimalFormat("0.########E0");
             sci.setRoundingMode(java.math.RoundingMode.HALF_UP);
             return sci.format(value);
-        } else {
+        }
+        else {
             DecimalFormat normal = new DecimalFormat("0.##########");
             normal.setRoundingMode(java.math.RoundingMode.HALF_UP);
             return normal.format(value);
         }
     }
-
 
     private boolean checkIfTextFieldIsEmpty()
     {
@@ -423,6 +381,18 @@ public class MainPanel extends JPanel implements ActionListener {
     private void jOptionPaneCannotDivideByZeroMessage()
     {
         JOptionPane.showMessageDialog(this,"Can't divide by zero", "Logic error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void handleOperation(OperationsLogic operation) {
+        if (checkIfTextFieldIsEmpty()) return;
+
+        try {
+            firstNumber = Double.parseDouble(mainTextField.getText());
+            currentOperation = operation;
+            startNewNumber = true;
+        } catch (NumberFormatException e) {
+            jOptionPaneMessageError();
+        }
     }
 
     @Override
