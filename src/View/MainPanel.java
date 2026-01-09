@@ -138,6 +138,7 @@ public class MainPanel extends JPanel implements ActionListener {
         button.setForeground(ColorPalette.TEXT_COLOR);
         button.setBorderPainted(false);
         button.setFont(TextPalette.MAIN_FONT);
+        button.setFocusPainted(false);
 
         button.addMouseListener(new MouseAdapter() {
             @Override
@@ -177,7 +178,7 @@ public class MainPanel extends JPanel implements ActionListener {
 
         if(mainTextField.getText().length() >= MAX_LENGTH && !startNewNumber)
         {
-            jOptionPaneTextFieldMessage();
+            jOptionPaneMessageHandle("The limit of the textfield has been reached", "Textfield limit");
             return;
         }
 
@@ -194,7 +195,7 @@ public class MainPanel extends JPanel implements ActionListener {
     {
         if(mainTextField.getText().length() >= MAX_LENGTH && !startNewNumber)
         {
-            jOptionPaneTextFieldMessage();
+            jOptionPaneMessageHandle("The limit of the textfield has been reached", "Textfield limit");
             return;
         }
 
@@ -235,7 +236,7 @@ public class MainPanel extends JPanel implements ActionListener {
             firstNumber = Double.parseDouble(mainTextField.getText());
 
             if (firstNumber < 0) {
-                JOptionPane.showMessageDialog(this,"You can't take the square root of a negative number","Square root error", JOptionPane.ERROR_MESSAGE);
+                jOptionPaneMessageHandle("You can't square root a negative number","Square root error");
                 return;
             }
 
@@ -244,7 +245,7 @@ public class MainPanel extends JPanel implements ActionListener {
         }
         catch (NumberFormatException e)
         {
-            jOptionPaneMessageError();
+            jOptionPaneMessageHandle("Please enter a valid numeric values", "Input error");
         }
 
     }
@@ -258,7 +259,7 @@ public class MainPanel extends JPanel implements ActionListener {
             currentOperation = new ToThePower();
             handleEquals();
         } catch (NumberFormatException e) {
-            jOptionPaneMessageError();
+            jOptionPaneMessageHandle("Please enter a valid numeric values", "Input error");
         }
     }
 
@@ -273,7 +274,7 @@ public class MainPanel extends JPanel implements ActionListener {
         }
         catch (NumberFormatException e)
         {
-            jOptionPaneMessageError();
+            jOptionPaneMessageHandle("Please enter a valid numeric values", "Input error");
         }
     }
 
@@ -297,7 +298,7 @@ public class MainPanel extends JPanel implements ActionListener {
             mainTextField.setText(formatResult(value));
         }
         catch (NumberFormatException e) {
-            jOptionPaneMessageError();
+            jOptionPaneMessageHandle("Please enter a valid numeric values", "Input error");
         }
     }
 
@@ -331,7 +332,7 @@ public class MainPanel extends JPanel implements ActionListener {
         secondNumber = Double.parseDouble(mainTextField.getText());
         if(currentOperation.getOperation().equals("/") && secondNumber == 0)
         {
-            jOptionPaneCannotDivideByZeroMessage();
+            jOptionPaneMessageHandle("Can't divide by zero", "Logic error");
             return;
         }
         double result = currentOperation.operation(firstNumber, secondNumber);
@@ -368,19 +369,9 @@ public class MainPanel extends JPanel implements ActionListener {
         return false;
     }
 
-    private void jOptionPaneTextFieldMessage()
+    private void jOptionPaneMessageHandle(String message, String title)
     {
-        JOptionPane.showMessageDialog(this, "The limit of the textfield has been reached", "Textfield limit", JOptionPane.ERROR_MESSAGE);
-    }
-
-    private void jOptionPaneMessageError()
-    {
-        JOptionPane.showMessageDialog(this, "Please enter a valid numeric values", "Input error", JOptionPane.ERROR_MESSAGE);
-    }
-
-    private void jOptionPaneCannotDivideByZeroMessage()
-    {
-        JOptionPane.showMessageDialog(this,"Can't divide by zero", "Logic error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, message, title, JOptionPane.ERROR_MESSAGE);
     }
 
     private void handleOperation(OperationsLogic operation) {
@@ -391,7 +382,7 @@ public class MainPanel extends JPanel implements ActionListener {
             currentOperation = operation;
             startNewNumber = true;
         } catch (NumberFormatException e) {
-            jOptionPaneMessageError();
+            jOptionPaneMessageHandle("Please enter a valid numeric values", "Input error");
         }
     }
 
