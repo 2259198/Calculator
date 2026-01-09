@@ -385,10 +385,18 @@ public class MainPanel extends JPanel implements ActionListener {
     }
 
     private String formatResult(double value) {
-        DecimalFormat df = new DecimalFormat("0.##########");
-        df.setRoundingMode(java.math.RoundingMode.HALF_UP);
-        return df.format(value);
+        if (Math.abs(value) >= 1e12 || Math.abs(value) < 1e-9) {
+
+            DecimalFormat sci = new DecimalFormat("0.########E0");
+            sci.setRoundingMode(java.math.RoundingMode.HALF_UP);
+            return sci.format(value);
+        } else {
+            DecimalFormat normal = new DecimalFormat("0.##########");
+            normal.setRoundingMode(java.math.RoundingMode.HALF_UP);
+            return normal.format(value);
+        }
     }
+
 
     private boolean checkIfTextFieldIsEmpty()
     {
