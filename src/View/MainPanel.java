@@ -70,16 +70,23 @@ public class MainPanel extends JPanel implements ActionListener {
         add(mainPanel);
     }
 
-    public void audioControlLogic() throws UnsupportedAudioFileException, IOException, LineUnavailableException
-    {
-        AudioInputStream audioStreamHover = AudioSystem.getAudioInputStream(fileHover);
+    private void audioControlLogic() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        // Load hover sound
+        AudioInputStream audioStreamHover = AudioSystem.getAudioInputStream(
+                getClass().getResource("/Sound/hover_sound.wav")
+        );
         hoverClip = AudioSystem.getClip();
         hoverClip.open(audioStreamHover);
 
-        AudioInputStream audioStreamClicked = AudioSystem.getAudioInputStream(fileClick);
+        // Load click sound
+        AudioInputStream audioStreamClicked = AudioSystem.getAudioInputStream(
+                getClass().getResource("/Sound/button_Clicked.wav")
+        );
         clickClip = AudioSystem.getClip();
         clickClip.open(audioStreamClicked);
     }
+
+
 
     private void createTextFieldPanel() {
 
