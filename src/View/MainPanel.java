@@ -36,8 +36,6 @@ public class MainPanel extends JPanel implements ActionListener {
 
     JTextField mainTextField = new JTextField();
 
-    File fileHover = new File("src/Sound/hover_sound.wav");
-    File fileClick = new File("src/Sound/button_Clicked.wav");
     private Clip hoverClip;
     private Clip clickClip;
 
@@ -71,20 +69,20 @@ public class MainPanel extends JPanel implements ActionListener {
     }
 
     private void audioControlLogic() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        // Load hover sound
+
         AudioInputStream audioStreamHover = AudioSystem.getAudioInputStream(
                 getClass().getResource("/Sound/hover_sound.wav")
         );
         hoverClip = AudioSystem.getClip();
         hoverClip.open(audioStreamHover);
 
-        // Load click sound
         AudioInputStream audioStreamClicked = AudioSystem.getAudioInputStream(
                 getClass().getResource("/Sound/button_Clicked.wav")
         );
         clickClip = AudioSystem.getClip();
         clickClip.open(audioStreamClicked);
     }
+
 
 
 
